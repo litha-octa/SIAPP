@@ -1,23 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Splash, Login ,Akun, Pesanan } from '../pages';
-import { BottomNavigator } from '../components/';
+import { Splash, Login  } from '../pages';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-// const MainApp = () => {
-//   return (
-//     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-//         <Tab.Screen name="Home" component={Home} />
-//         <Tab.Screen name="Pesanan" component={Pesanan} />
-//         <Tab.Screen name="Akun" component={Akun} />
-//       </Tab.Navigator>
-//   );
-// };
-
 
 const Router = () => {
   return (
