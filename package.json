@@ -1,5 +1,5 @@
 {
-  "name": "antarLaundry",
+  "name": "SIAPPv2",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,13 +14,14 @@
     "@react-navigation/bottom-tabs": "^5.7.2",
     "@react-navigation/native": "^5.7.1",
     "@react-navigation/stack": "^5.7.1",
+    "native-base": "^3.4.15",
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-reanimated": "^1.10.1",
-    "react-native-safe-area-context": "^3.1.1",
+    "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^2.9.0",
-    "react-native-svg": "^12.1.0",
+    "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3"
   },
   "devDependencies": {
