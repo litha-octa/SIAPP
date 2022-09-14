@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+
 import {
   View,
   Text,
@@ -6,17 +7,21 @@ import {
   TextInput,
   StyleSheet,
   CheckBox,
+  TouchableOpacity,
 } from 'react-native';
 
+import {SplashImg} from '../../assets/img';
 
-import {PolisiImg} from '../../assets/img';
-
-const Login = () => {
+const Login = ({navigation}) => {
   const [isSelected, setSelection] = useState(false);
+  const toHome = () => {
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={styles.background}>
       <View style={styles.form}>
-        <Image source={PolisiImg} style={styles.logo} />
+        <Image source={SplashImg} style={styles.logo} />
         <TextInput style={styles.input} placeholder={'Username atau Email'} />
         <TextInput
           style={styles.input}
@@ -28,17 +33,16 @@ const Login = () => {
           <Text style={styles.label}>Ingat Saya</Text>
           <Text style={styles.label2}>Lupa Password</Text>
         </View>
-
-        <View style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={toHome}>
           <Text style={styles.btnText}>Masuk</Text>
-        </View>
+        </TouchableOpacity>
         <Text style={styles.help}>Bantuan Login</Text>
       </View>
     </View>
   );
 };
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
   background: {
@@ -46,26 +50,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0f4c81',
+    backgroundColor: '#a10b3a',
   },
   form: {
     backgroundColor: 'white',
     width: '94%',
-    height: '70%',
+    height: '10%',
     padding: 5,
+    marginTop: '20%',
+    flex: 1,
   },
   logo: {
-    width: 90,
+    width: 200,
     height: 90,
     alignSelf: 'center',
     marginTop: 20,
-    backgroundColor: 'gold',
-    borderRadius: 10,
+    resizeMode: 'contain',
   },
   input: {
     width: '80%',
     alignSelf: 'center',
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     marginTop: 15,
     fontSize: 20,
   },
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     width: '80%',
     height: '10%',
     borderRadius: 10,
-    backgroundColor: '#0f4c81',
+    backgroundColor: 'maroon',
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -97,12 +102,12 @@ const styles = StyleSheet.create({
   label2: {
     color: 'grey',
     fontSize: 15,
-    marginLeft: '37%',
+    marginLeft: '25%',
   },
   help: {
     color: 'grey',
     fontSize: 15,
-    textAlign:'center',
-    marginTop:5,
+    textAlign: 'center',
+    marginTop: 5,
   },
 });
