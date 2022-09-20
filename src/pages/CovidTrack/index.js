@@ -42,7 +42,7 @@ const CovidTrack = ({navigation}) => {
             navigation.navigate('Home');
           }}
         />
-        <Text style={styles.covidHeading}>COVID19 DASHBOARD</Text>
+        <Text style={styles.covidHeading}>BIMA dan BISA</Text>
       </View>
       <View style={styles.cards}>
         <ScrollView

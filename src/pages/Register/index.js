@@ -17,7 +17,7 @@ import {SplashImg} from '../../assets/img';
 import {auth} from '../../firebase/config';
 
 const Register = ({navigation}) => {
-  const [isSelected, setSelection] = useState();
+  const [isSelected, setSelection] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -83,6 +83,7 @@ const Register = ({navigation}) => {
                 placeholder={'NIK'}
                 onChangeText={(text) => setEmail(text)}
                 value={email}
+                keyboardType={'numeric'}
               />
             </View>
             <View

@@ -18,13 +18,17 @@ import {
   Warning,
   SplashImg,
   cctvIcon,
+  WA,
+  ZOOM,
+  IG,
 } from '../../assets';
+import ImageSlider from 'react-native-image-slider';
 
 const Home = ({navigation}) => {
   const Images = [Banner, Banner2, Banner3];
-  const iconsize = 30;
   const [inShown, setInShown] = useState(false);
   const [search, setSearch] = useState();
+  const dummyName = 'jhon doe'
   const shownHandler = () => {
     if (inShown === false) {
       setInShown(true);
@@ -36,151 +40,162 @@ const Home = ({navigation}) => {
     <SafeAreaView style={styles.body}>
       <ScrollView style={styles.scrollBar}>
         <View>
-          {/* MODEL LA</ScrollView>YOUT 1 */}
-          <View>
-            <View style={styles.navbar}>
-              <Image source={SplashImg} style={styles.iconNavbar} />
-              <View style={styles.navbarContainer}>
-                <TouchableOpacity
-                  onPress={() => Linking.openURL('https://web.whatsapp.com')}>
-                  <Icon name="whatsapp-square" size={iconsize} color="maroon" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => Linking.openURL('https://www.instagram.com')}>
-                  <Icon
-                    name="instagram-square"
-                    size={iconsize}
-                    color="maroon"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Icon name="vimeo-square" size={iconsize} color="maroon" />
-                  {/* <Image source={ZOOM} style={styles.iconNavbar} /> */}
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('Login');
-                  }}>
-                  <Icon
-                    name="angle-double-right"
-                    size={iconsize}
-                    color="maroon"
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View
+          <View style={styles.navbar}>
+            <Image source={SplashImg} style={styles.iconNavbar} />
+          </View>
+          <View style={{height: 'auto', paddingHorizontal: 30, paddingTop: 1}}>
+            <Text style={{fontSize: 25, fontFamily: 'arial', color: 'black'}}>
+              Selamat Datang,
+            </Text>
+            <Text
               style={{
-                backgroundColor: 'maroon',
-                flexDirection: 'row',
-                padding: 10,
+                fontSize: 25,
+                fontFamily: 'arial',
+                color: 'black',
+                fontWeight: 'bold',
+                textTransform: 'capitalize',
               }}>
-              <TextInput
-                style={{
-                  backgroundColor: 'white',
-                  width: '87%',
-                  borderRadius: 15,
-                  height: 40,
-                  fontSize: 15,
-                }}
-                value={search}
-                onChange={(text) => setSearch(text)}
-              />
-              <Icon
-                name="search"
-                size={30}
-                color={'white'}
-                style={{
-                  marginLeft: 5,
-                  width: '10%',
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  paddingTop: 5,
-                  paddingHorizontal: 5,
-                }}
-                onPress={() => setSearch('')}
-              />
-            </View>
-            <ScrollView
+              {dummyName}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              padding: 10,
+            }}>
+            <TextInput
               style={{
-                flex: 1,
-                width: '100%',
-                padding: 5,
-                backgroundColor: 'maroon',
+                backgroundColor: 'lightgrey',
+                width: '87%',
+                borderRadius: 15,
+                height: 40,
+                fontSize: 15,
               }}
-              pagingEnabled={true}
-              horizontal={true}
-              scrollEventThrottle={20}>
-              {Images.map((img) => {
-                return (
-                  <Image
-                    source={img}
-                    style={{
-                      resizeMode: 'contain',
-                      width: 410,
-                      height: 200,
-                      backgroundColor: 'maroon',
-                    }}
-                  />
-                );
-              })}
-            </ScrollView>
+              value={search}
+              onChange={(text) => setSearch(text)}
+            />
+            <Icon
+              name="search"
+              size={30}
+              color={'lightgrey'}
+              style={{
+                marginLeft: 5,
+                width: '10%',
+                borderRadius: 10,
+                justifyContent: 'center',
+                paddingTop: 5,
+                paddingHorizontal: 5,
+              }}
+              onPress={() => setSearch('')}
+            />
+          </View>
+          <ImageSlider
+            loopBothSides
+            autoPlayWithInterval={2000}
+            images={Images}
+            customSlide={({index, item, style, width}) => (
+              // It's important to put style here because it's got offset inside
+              <View
+                key={index}
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  padding: 5,
+                  backgroundColor: 'maroon',
+                }}>
+                <Image
+                  source={item}
+                  style={{
+                    resizeMode: 'contain',
+                    width: 400,
+                    height: 200,
+                    backgroundColor: 'maroon',
+                  }}
+                />
+              </View>
+            )}
+          />
+          <View style={{height: 'auto', paddingHorizontal: 30, paddingTop: 20}}>
+            <Text
+              style={{
+                fontSize: 15,
+                fontFamily: 'arial',
+                color: 'black',
+                fontWeight: 'bold',
+              }}>
+              Hubungi Kami :
+            </Text>
             <View
               style={{
-                backgroundColor: 'gold',
-                justifyContent: 'center',
-                alignItems: 'center',
-                display: 'flex',
                 flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginTop: 15,
               }}>
-              <TouchableOpacity onPress={shownHandler} style={styles.panic}>
-                <Image source={Warning} style={styles.Icon} />
-                <Text style={styles.panicText}>Panic Alert !!!</Text>
+              <TouchableOpacity style={styles.contactBy}>
+                <Image source={WA} style={styles.iconNavbar2} />
               </TouchableOpacity>
+              <TouchableOpacity style={styles.contactBy}>
+                <Icon name="instagram-square" size={40} color="#ed4343" />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.contactBy}>
+                <Image source={ZOOM} style={styles.iconNavbar2} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              justifyContent: 'center',
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+            }}>
+            <TouchableOpacity onPress={shownHandler} style={styles.panic}>
+              <Image source={Warning} style={styles.Icon} />
+              {/* <Text style={styles.panicText}>Panic Alert !!!</Text> */}
+            </TouchableOpacity>
 
-              <View
-                style={
-                  inShown === false
-                    ? styles.hiddenPanicOption
-                    : styles.shownPanicOption
-                }>
-                <Text style={styles.option}>
-                  <Icon name="phone" size={10} color="maroon" />
-                  -- Ambulance
-                </Text>
-                <Text style={styles.option}>
-                  <Icon name="phone" size={10} color="maroon" />
-                  -- Polisi
-                </Text>
-                <Text style={styles.option}>
-                  <Icon name="phone" size={10} color="maroon" /> -- Pemadam
-                  Kebakaran
-                </Text>
-              </View>
+            <View
+              style={
+                inShown === false
+                  ? styles.hiddenPanicOption
+                  : styles.shownPanicOption
+              }>
+              <Text style={styles.option}>
+                <Icon name="phone" size={10} color="maroon" />
+                -- Ambulance
+              </Text>
+              <Text style={styles.option}>
+                <Icon name="phone" size={10} color="maroon" />
+                -- Polisi
+              </Text>
+              <Text style={styles.option}>
+                <Icon name="phone" size={10} color="maroon" /> -- Pem. Kebakaran
+              </Text>
             </View>
-            <View style={styles.container}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                  navigation.navigate('CovidTrack');
-                }}>
-                <Icon name="chart-line" size={40} color={'maroon'} />
-                <Text style={styles.btnText}>BISA</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                  navigation.navigate('CovidTrack');
-                }}>
-                {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
-                <Icon name="chart-line" size={40} color={'maroon'} />
-                <Text style={styles.btnText}>BIMA</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}>
-                <Image source={cctvIcon} style={styles.bimaLogo} />
-                <Text style={styles.btnText}>CCTV</Text>
-              </TouchableOpacity>
-            </View>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                navigation.navigate('CovidTrack');
+              }}>
+              <Icon name="chart-line" size={40} color={'maroon'} />
+              <Text style={styles.btnText}>BISA</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                navigation.navigate('CovidTrack');
+              }}>
+              {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
+              <Icon name="chart-line" size={40} color={'maroon'} />
+              <Text style={styles.btnText}>BIMA</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Image source={cctvIcon} style={styles.bimaLogo} />
+              <Text style={styles.btnText}>CCTV</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -189,6 +204,16 @@ const Home = ({navigation}) => {
 };
 export default Home;
 const styles = StyleSheet.create({
+  contactBy: {
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 3,
+    // borderColor:'maroon',
+    borderColor: '#fb8a8a',
+    borderRadius:10,
+  },
   body: {
     backgroundColor: 'white',
     flex: 1,
@@ -199,19 +224,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   navbar: {
-    borderBottomWidth: 2,
-    borderBottomColor: 'maroon',
     display: 'flex',
     flexDirection: 'row',
     padding: 5,
     shadowColor: 'grey',
   },
   navbarContainer: {
-    justifyContent: 'space-around',
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: 170,
-    width: 120,
+    marginLeft: 100,
+    width: 150,
+    height: 40,
+    marginTop: 7,
+    justifyContent: 'space-between',
   },
   itemNavbar: {
     color: 'white',
@@ -220,9 +245,16 @@ const styles = StyleSheet.create({
   },
   iconNavbar: {
     resizeMode: 'contain',
-    width: 110,
-    height: 45,
+    width: 160,
+    height: 85,
     marginLeft: 5,
+  },
+  iconNavbar2: {
+    resizeMode: 'contain',
+    width: 40,
+    height: 35,
+    marginLeft: 5,
+    marginTop: 3,
   },
   banner: {
     width: '100%',
@@ -230,16 +262,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
     resizeMode: 'contain',
   },
-  panicOpen: {
-    backgroundColor: 'gold',
-    width: '50%',
-    height: 120,
-    borderRadius: 10,
-    paddingVertical: '10%',
-    paddingHorizontal: '5%',
-  },
   panic: {
-    backgroundColor: 'gold',
+    backgroundColor: 'white',
     width: '50%',
     height: 120,
     borderRadius: 10,
@@ -251,7 +275,7 @@ const styles = StyleSheet.create({
 
   panicText: {
     fontFamily: 'Arial',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     color: 'red',
   },
@@ -266,7 +290,7 @@ const styles = StyleSheet.create({
   },
   option: {
     fontFamily: 'arial',
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'maroon',
     textDecorationStyle: 'solid',
@@ -280,8 +304,8 @@ const styles = StyleSheet.create({
   },
   Icon: {
     resizeMode: 'contain',
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     marginLeft: '5%',
   },
   cctv: {
@@ -299,6 +323,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     padding: '2%',
+    marginTop: 10,
     justifyContent: 'space-between',
   },
   btn: {
@@ -307,7 +332,7 @@ const styles = StyleSheet.create({
     height: 85,
     borderRadius: 6,
     alignItems: 'center',
-    },
+  },
   btnText: {
     color: 'maroon',
     fontFamily: 'Arial',

@@ -15,7 +15,7 @@ import {auth} from '../../firebase/config';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Login = ({navigation}) => {
-  const [isSelected, setSelection] = useState(false);
+  const [isSelected, setSelection] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
@@ -59,6 +59,8 @@ const Login = ({navigation}) => {
             placeholder={'NIK'}
             onChangeText={(text) => setEmail(text)}
             value={email}
+            numeric
+            keyboardType={'numeric'}
           />
         </View>
         <View
