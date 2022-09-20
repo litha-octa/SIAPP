@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "622405130239",
+    "firebase_url": "https://sistersepakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sistersepakat",
+    "storage_bucket": "sistersepakat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622405130239:android:c678814e7be9a7cad2b9ca",
+        "android_client_info": {
+          "package_name": "com.sistersepakat.appSistersepakat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622405130239-vqm5nvt6ubd05fcl4g3lg1u30vdk7vfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sistersepakat.appSistersepakat",
+            "certificate_hash": "07c1d60b63d367112884078e9151c09d7e3ab59c"
+          }
+        },
+        {
+          "client_id": "622405130239-vcnqt4mc0c7cr4hel7hm8thd6o85dvge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpS8PKWWMxlsxwIBsqwoDiWIq2c839r8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622405130239-vcnqt4mc0c7cr4hel7hm8thd6o85dvge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

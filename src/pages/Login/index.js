@@ -22,7 +22,7 @@ const Login = ({navigation}) => {
     <View style={styles.background}>
       <View style={styles.form}>
         <Image source={SplashImg} style={styles.logo} />
-        <TextInput style={styles.input} placeholder={'Username atau Email'} />
+        <TextInput style={styles.input} placeholder={'NIK'} />
         <TextInput
           style={styles.input}
           placeholder={'Password'}
@@ -36,6 +36,13 @@ const Login = ({navigation}) => {
         <TouchableOpacity style={styles.btn} onPress={toHome}>
           <Text style={styles.btnText}>Masuk</Text>
         </TouchableOpacity>
+        <Text
+          style={styles.help}
+          onPress={() => {
+            navigation.navigate('Register');
+          }}>
+          Belum Punya Akun ? Daftar Disini !
+        </Text>
         <Text style={styles.help}>Bantuan Login</Text>
       </View>
     </View>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   View,
   ScrollView,
@@ -11,15 +12,24 @@ import {
 } from 'react-native';
 import {
   Banner,
+  Banner2,
+  Banner3,
   Warning,
-  ZOOM,
+  SplashImg,
   cctvIcon,
-  WA,
-  IG,
-  Bisa,
 } from '../../assets';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const Images = [Banner, Banner2, Banner3];
+  const iconsize = 30;
+  const [inShown, setInShown] = useState(false);
+  const shownHandler = () => {
+    if (inShown === false) {
+      setInShown(true);
+    } else {
+      setInShown(false);
+    }
+  };
   return (
     <SafeAreaView style={styles.body}>
       <ScrollView style={styles.scrollBar}>
@@ -27,44 +37,106 @@ const Home = () => {
           {/* MODEL LA</ScrollView>YOUT 1 */}
           <View>
             <View style={styles.navbar}>
-              <TouchableOpacity
-                onPress={() => Linking.openURL('https://web.whatsapp.com')}>
-                <Image source={WA} style={styles.iconNavbar} />
-                {/* <Text style={styles.itemNavbar}>Chatku</Text> */}
+              <Image source={SplashImg} style={styles.iconNavbar} />
+              <View style={styles.navbarContainer}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://web.whatsapp.com')}>
+                  <Icon name="whatsapp-square" size={iconsize} color="maroon" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://www.instagram.com')}>
+                  <Icon
+                    name="instagram-square"
+                    size={iconsize}
+                    color="maroon"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon name="vimeo-square" size={iconsize} color="maroon" />
+                  {/* <Image source={ZOOM} style={styles.iconNavbar} /> */}
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('Login');
+                  }}>
+                  <Icon
+                    name="angle-double-right"
+                    size={iconsize}
+                    color="maroon"
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <ScrollView
+              style={{flex: 1,width:'100%', marginBottom:50,}}
+              pagingEnabled={true}
+              horizontal={true}
+              scrollEventThrottle={20}>
+              {Images.map((img) => {
+                return <Image source={img} style={{resizeMode:'contain',width:410,height:200,backgroundColor:'maroon'}} />;
+              })}
+            </ScrollView>
+            <View
+              style={{
+                backgroundColor: 'gold',
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'row',
+              }}>
+              <TouchableOpacity onPress={shownHandler} style={styles.panic}>
+                <Image source={Warning} style={styles.Icon} />
+                <Text style={styles.panicText}>Panic Alert !!!</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL('https://www.instagram.com')
+
+              <View
+                style={
+                  inShown === false
+                    ? styles.hiddenPanicOption
+                    : styles.shownPanicOption
                 }>
-                <Image source={IG} style={styles.iconNavbar} />
-                {/* <Text style={styles.itemNavbar}>Sepakatgram</Text> */}
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={ZOOM} style={styles.iconNavbar} />
-                {/* <Text style={styles.itemNavbar}>Zoomku</Text> */}
-              </TouchableOpacity>
+                <Text style={styles.option}>
+                  <Icon name="phone" size={10} color="maroon" />
+                  -- Ambulance
+                </Text>
+                <Text style={styles.option}>
+                  <Icon name="phone" size={10} color="maroon" />
+                  -- Polisi
+                </Text>
+                <Text style={styles.option}>
+                  <Icon name="phone" size={10} color="maroon" /> -- Pemadam
+                  Kebakaran
+                </Text>
+              </View>
             </View>
-            <Image source={Banner} style={styles.banner} />
 
-            <TouchableOpacity style={styles.panic}>
-              <Image source={Warning} style={styles.Icon} />
-              <Text style={styles.panicText}>Panic Alert !!!</Text>
-            </TouchableOpacity>
-            <View style={styles.container}>
-              <TouchableOpacity style={styles.btn}>
-                <Image source={Bisa} style={styles.bimaLogo} />
-                {/* <Text style={styles.btnText}>BISA</Text> */}
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.btn}>
-                <Image source={Bisa} style={styles.bimaLogo} />
-                {/* <Text style={styles.btnText}>BIMA</Text> */}
-              </TouchableOpacity>
-            </View>
             <TouchableOpacity style={styles.cctv}>
               <Image source={cctvIcon} style={styles.bimaLogo} />
               <Text style={styles.cctvText}>CCTV</Text>
             </TouchableOpacity>
+
+            <View style={styles.container}>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => {
+                  navigation.navigate('CovidTrack');
+                }}>
+                {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
+
+                <Icon name="chart-line" size={40} color={'maroon'} />
+                <Text style={styles.btnText}>BISA</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => {
+                  navigation.navigate('CovidTrack');
+                }}>
+                {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
+                <Icon name="chart-line" size={40} color={'maroon'} />
+                <Text style={styles.btnText}>BIMA</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -81,14 +153,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   navbar: {
-    // backgroundColor: '#a10b3a',
-    borderBottomColor: '#a10b3a',
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
+    borderBottomColor: 'maroon',
     display: 'flex',
     flexDirection: 'row',
+    padding: 5,
+    shadowColor: 'grey',
+  },
+  navbarContainer: {
     justifyContent: 'space-around',
-    paddingTop: 15,
-    paddingBottom: 15,
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 170,
+    width: 120,
   },
   itemNavbar: {
     color: 'white',
@@ -97,10 +174,9 @@ const styles = StyleSheet.create({
   },
   iconNavbar: {
     resizeMode: 'contain',
-    width: 40,
-    height: 40,
-    // marginHorizontal: 10,
-    borderRadius: 20,
+    width: 110,
+    height: 45,
+    marginLeft: 5,
   },
   banner: {
     width: '100%',
@@ -108,20 +184,47 @@ const styles = StyleSheet.create({
     marginTop: 5,
     resizeMode: 'contain',
   },
+  panicOpen: {
+    backgroundColor: 'gold',
+    width: '50%',
+    height: 150,
+    borderRadius: 10,
+    paddingVertical: '10%',
+    paddingHorizontal: '5%',
+  },
   panic: {
     backgroundColor: 'gold',
-    width: '45%',
+    width: '50%',
     height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
     borderRadius: 10,
+    paddingVertical: '10%',
+    paddingHorizontal: '5%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
   panicText: {
     fontFamily: 'Arial',
     fontSize: 20,
     fontWeight: 'bold',
     color: 'red',
+  },
+  hiddenPanicOption: {
+    display: 'none',
+  },
+  shownPanicOption: {
+    width: '50%',
+    height: 150,
+    paddingVertical: 20,
+    paddingHorizontal: 5,
+  },
+  option: {
+    fontFamily: 'arial',
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'maroon',
+    textDecorationStyle: 'solid',
+    marginBottom: 10,
   },
   cctvText: {
     fontFamily: 'Arial',
@@ -131,45 +234,46 @@ const styles = StyleSheet.create({
   },
   Icon: {
     resizeMode: 'contain',
-    width: '30%',
-    height: '30%',
+    width: 40,
+    height: 40,
+    marginLeft: '5%',
   },
   cctv: {
     width: '100%',
     marginRight: '4%',
-    height: 90,
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: '#a10b3a',
+    // borderWidth: 2,
+    // borderColor: '#a10b3a',
   },
   container: {
-    height: 100,
-    marginTop: '2%',
-    backgroundColor: 'red',
+    height: 110,
+    marginTop: '3%',
+    backgroundColor: 'maroon',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    padding: '2%',
+    justifyContent: 'space-between',
   },
   btn: {
     backgroundColor: 'white',
-    width: '25%',
-    height: 50,
+    width: '35%',
+    height: 90,
     borderRadius: 10,
-    alignItems:'center',
+    alignItems: 'center',
   },
   btnText: {
-    color: '#a10b3a',
+    color: 'maroon',
     fontFamily: 'Arial',
     fontWeight: 'bold',
     fontSize: 23,
     textDecorationLine: 'underline',
     textAlign: 'center',
   },
-  bimaLogo:{
-    resizeMode:'contain',
-    height:50,
-    width:70,
+  bimaLogo: {
+    resizeMode: 'contain',
+    height: 50,
+    width: 70,
   },
 });

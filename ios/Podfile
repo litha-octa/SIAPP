@@ -3,12 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'SIAPPv2' do
+target 'sister' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'SIAPPv2Tests' do
+  target 'sisterTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +23,10 @@ target 'SIAPPv2' do
   end
 end
 
-target 'SIAPPv2-tvOS' do
-  # Pods for SIAPPv2-tvOS
+target 'sister-tvOS' do
+  # Pods for sister-tvOS
 
-  target 'SIAPPv2-tvOSTests' do
+  target 'sister-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
