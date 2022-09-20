@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Linking,
   SafeAreaView,
+  TextInput,
 } from 'react-native';
 import {
   Banner,
@@ -23,6 +24,7 @@ const Home = ({navigation}) => {
   const Images = [Banner, Banner2, Banner3];
   const iconsize = 30;
   const [inShown, setInShown] = useState(false);
+  const [search, setSearch] = useState();
   const shownHandler = () => {
     if (inShown === false) {
       setInShown(true);
@@ -67,13 +69,60 @@ const Home = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             </View>
+            <View
+              style={{
+                backgroundColor: 'maroon',
+                flexDirection: 'row',
+                padding: 10,
+              }}>
+              <TextInput
+                style={{
+                  backgroundColor: 'white',
+                  width: '87%',
+                  borderRadius: 15,
+                  height: 40,
+                  fontSize: 15,
+                }}
+                value={search}
+                onChange={(text) => setSearch(text)}
+              />
+              <Icon
+                name="search"
+                size={30}
+                color={'white'}
+                style={{
+                  marginLeft: 5,
+                  width: '10%',
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  paddingTop: 5,
+                  paddingHorizontal: 5,
+                }}
+                onPress={() => setSearch('')}
+              />
+            </View>
             <ScrollView
-              style={{flex: 1,width:'100%', marginBottom:50,}}
+              style={{
+                flex: 1,
+                width: '100%',
+                padding: 5,
+                backgroundColor: 'maroon',
+              }}
               pagingEnabled={true}
               horizontal={true}
               scrollEventThrottle={20}>
               {Images.map((img) => {
-                return <Image source={img} style={{resizeMode:'contain',width:410,height:200,backgroundColor:'maroon'}} />;
+                return (
+                  <Image
+                    source={img}
+                    style={{
+                      resizeMode: 'contain',
+                      width: 410,
+                      height: 200,
+                      backgroundColor: 'maroon',
+                    }}
+                  />
+                );
               })}
             </ScrollView>
             <View
@@ -109,24 +158,15 @@ const Home = ({navigation}) => {
                 </Text>
               </View>
             </View>
-
-            <TouchableOpacity style={styles.cctv}>
-              <Image source={cctvIcon} style={styles.bimaLogo} />
-              <Text style={styles.cctvText}>CCTV</Text>
-            </TouchableOpacity>
-
             <View style={styles.container}>
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
                   navigation.navigate('CovidTrack');
                 }}>
-                {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
-
                 <Icon name="chart-line" size={40} color={'maroon'} />
                 <Text style={styles.btnText}>BISA</Text>
               </TouchableOpacity>
-
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
@@ -135,6 +175,10 @@ const Home = ({navigation}) => {
                 {/* <Image source={Bisa} style={styles.bimaLogo} /> */}
                 <Icon name="chart-line" size={40} color={'maroon'} />
                 <Text style={styles.btnText}>BIMA</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}>
+                <Image source={cctvIcon} style={styles.bimaLogo} />
+                <Text style={styles.btnText}>CCTV</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -148,6 +192,8 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'white',
     flex: 1,
+    height: '100%',
+    width: '100%',
   },
   scrollBar: {
     backgroundColor: 'white',
@@ -187,7 +233,7 @@ const styles = StyleSheet.create({
   panicOpen: {
     backgroundColor: 'gold',
     width: '50%',
-    height: 150,
+    height: 120,
     borderRadius: 10,
     paddingVertical: '10%',
     paddingHorizontal: '5%',
@@ -195,7 +241,7 @@ const styles = StyleSheet.create({
   panic: {
     backgroundColor: 'gold',
     width: '50%',
-    height: 150,
+    height: 120,
     borderRadius: 10,
     paddingVertical: '10%',
     paddingHorizontal: '5%',
@@ -248,8 +294,7 @@ const styles = StyleSheet.create({
     // borderColor: '#a10b3a',
   },
   container: {
-    height: 110,
-    marginTop: '3%',
+    height: '20%',
     backgroundColor: 'maroon',
     display: 'flex',
     flexDirection: 'row',
@@ -258,11 +303,11 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: 'white',
-    width: '35%',
-    height: 90,
-    borderRadius: 10,
+    width: '25%',
+    height: 85,
+    borderRadius: 6,
     alignItems: 'center',
-  },
+    },
   btnText: {
     color: 'maroon',
     fontFamily: 'Arial',

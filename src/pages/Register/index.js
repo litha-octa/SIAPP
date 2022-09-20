@@ -8,92 +8,140 @@ import {
   StyleSheet,
   CheckBox,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {SplashImg} from '../../assets/img';
-// import {firebase} from '../../firebase/config';
+import {auth} from '../../firebase/config';
 
 const Register = ({navigation}) => {
   const [isSelected, setSelection] = useState();
-  const [fullName, setFullName] = useState('');
-  const [nik, setNik] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // const onFooterLinkPress = () => {
-  //   navigation.navigate('Login');
-  // };
+  const [showPass, setShowPass] = useState(false);
+  const [confirmPass, setConfirmPass] = useState(false);
+  const shownHandler = () => {
+    if (showPass === false) {
+      setShowPass(true);
+    } else {
+      setShowPass(false);
+    }
+  }
+  const shownHandler2 =()=>{ 
+    if (confirmPass === false){
+      setConfirmPass(true)
+    }else{
+      setConfirmPass(false)
+    }
+  };
 
-  // const onRegisterPress = () => {
-  //   if (password !== confirmPassword) {
-  //     alert("Passwords don't match.");
-  //     return;
-  //   }
-
-  //   firebase
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((response) => {
-  //       const uid = response.user.uid;
-  //       const data = {
-  //         id: uid,
-  //         email,
-  //         fullName,
-  //       };
-  //       const usersRef = firebase.firestore().collection('users');
-  //       usersRef
-  //         .doc(uid)
-  //         .set(data)
-  //         .then(() => {
-  //           navigation.navigate('Home', {user: data});
-  //         })
-  //         .catch((error) => {
-  //           alert(error);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
-  // };
-
+  const onRegisterPress = () => {
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
+      return;
+    }else{
+      auth
+        .createUserWithEmailAndPassword(`${email}@email.com`, password)
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          console.log('Registered with:', user.email);
+          alert('Pendaftaran berhasil !')
+          setEmail('');
+          setPassword('');
+          navigation.navigate('Login');
+        })
+        .catch((error) => alert(error.message));
+    };
+  };
   return (
     <View style={styles.background}>
       <View style={styles.form}>
         <Image source={SplashImg} style={styles.logo} />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholder={'Nama Lengkap'}
           onChangeText={(text) => setFullName(text)}
           value={fullName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={'NIK'}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={'Password'}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder={'Konfirmasi Password'}
-          secureTextEntry={true}
-          onChangeText={(text) => setConfirmPassword(text)}
-          value={confirmPassword}
-        />
+        /> */}
+        <KeyboardAvoidingView>
+          <ScrollView>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '82%',
+                alignItems: 'center',
+                marginLeft: 30,
+                borderBottomColor: 'black',
+                borderBottomWidth: 2,
+              }}>
+              <TextInput
+                style={styles.input}
+                placeholder={'NIK'}
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '82%',
+                alignItems: 'center',
+                marginLeft: 30,
+                borderBottomColor: 'black',
+                borderBottomWidth: 2,
+              }}>
+              <TextInput
+                style={styles.input}
+                placeholder={'Password'}
+                secureTextEntry={showPass == false ? true : false}
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+              />
+              <Icon
+                name={showPass === false ? 'eye' : 'eye-slash'}
+                onPress={shownHandler}
+                size={25}
+                color="grey"
+                style={{marginTop: 10, marginLeft: 20}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '82%',
+                alignItems: 'center',
+                marginLeft: 30,
+                borderBottomColor: 'black',
+                borderBottomWidth: 2,
+              }}>
+              <TextInput
+                style={styles.input}
+                placeholder={'Konfirmasi Password'}
+                secureTextEntry={confirmPass == false ? true : false}
+                onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
+              />
+              <Icon
+                name={confirmPass === false ? 'eye' : 'eye-slash'}
+                onPress={shownHandler2}
+                size={25}
+                color="grey"
+                style={{marginTop: 10, marginLeft: 20}}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
         <View style={styles.checkbox}>
           <CheckBox value={isSelected} onValueChange={setSelection} />
           <Text style={styles.label}>
             Saya Menyetujui Syarat Ketentua dan Kebijakan Privasi
           </Text>
         </View>
-        <TouchableOpacity style={styles.btn} onPress={() => onRegisterPress()}>
+        <TouchableOpacity style={styles.btn} onPress={onRegisterPress}>
           <Text style={styles.btnText}>Daftar</Text>
         </TouchableOpacity>
         <Text
@@ -122,7 +170,7 @@ const styles = StyleSheet.create({
     width: '94%',
     height: '10%',
     padding: 5,
-    marginTop: '20%',
+    marginTop: '6%',
     flex: 1,
   },
   logo: {
@@ -135,7 +183,6 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     alignSelf: 'center',
-    borderBottomWidth: 2,
     marginTop: 15,
     fontSize: 20,
   },
