@@ -92,7 +92,8 @@ const Login = ({navigation}) => {
           <Text style={styles.label}>Ingat Saya</Text>
           <Text style={styles.label2}>Lupa Password</Text>
         </View>
-        <TouchableOpacity style={styles.btn} onPress={handleLogin}>
+        <TouchableOpacity style={styles.btn}
+        onPress={handleLogin}>
           <Text style={styles.btnText}>Masuk</Text>
         </TouchableOpacity>
         <Text
