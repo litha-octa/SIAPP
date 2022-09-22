@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
         console.log('Logged in with:', user.email);
         setEmail('');
         setPassword('');
-        navigation.navigate('Home');
+        navigation.navigate('MainApp');
       })
       .catch((error) => alert(error.message));
   };

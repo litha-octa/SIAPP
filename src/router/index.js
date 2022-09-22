@@ -1,9 +1,88 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Splash, Login, Home, Register, CovidTrack} from '../pages';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {BottomNavigator} from '../components/BottomNavigator';
+
+import {
+  NyakuKomIcon,
+  NewLogo,
+  HomeIcon,
+  PersonSearch,
+  AkunkuIcon,
+} from '../assets';
+import {
+  Splash,
+  Login,
+  Home,
+  Register,
+  Nyaku,
+  NyakuKom,
+  Akunku,
+  CovidTrack,
+} from '../pages';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const homeName = 'Home';
+const nyakuName = 'Nyaku';
+const nyakuKomName = 'NyakuKom';
+const akunkuName = 'Akunku';
+
+const MainApp = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName={MainApp}
+      tabBarOptions={{
+        activeTintColor: 'white',
+        inactiveTintColor: 'white',
+        labelStyle: {paddingBottom: 10, fontSize: 15, fontWeight: 'bold'},
+        style: {padding: 10, height: 80, backgroundColor: '#E62129'},
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Image source={HomeIcon} style={styles.iconBottom} />
+          ),
+          tabBarLabel: 'Home',
+        }}
+      />
+      <Tab.Screen
+        name="Nyaku"
+        component={Nyaku}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Image source={NewLogo} style={styles.iconBottom} />
+          ),
+          tabBarLabel: 'Nyaku',
+        }}
+      />
+      <Tab.Screen
+        name="NyakuKom"
+        component={NyakuKom}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Image source={NyakuKomIcon} style={styles.iconBottom} />
+          ),
+          tabBarLabel: 'Nyaku Komunitas',
+        }}
+      />
+      <Tab.Screen
+        name="Akunku"
+        component={Akunku}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Image source={AkunkuIcon} style={styles.iconBottom} />
+          ),
+          tabBarLabel: 'Akunku',
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const Router = () => {
   return (
@@ -24,8 +103,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="MainApp"
+        component={MainApp}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -39,4 +118,9 @@ const Router = () => {
 
 export default Router;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  iconBottom:{
+      width:45,
+      height:45,
+  }
+});

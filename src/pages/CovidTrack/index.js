@@ -39,7 +39,7 @@ const CovidTrack = ({navigation}) => {
           size={40}
           color="maroon"
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.navigate('MainApp');
           }}
         />
         <Text style={styles.covidHeading}>BIMA dan BISA</Text>
